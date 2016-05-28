@@ -1,10 +1,10 @@
 package de.muellerd.turnierwart;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -16,8 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import de.muellerd.turnierwart.classes.SessionData;
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity{
 
         final ListView listView = (ListView) findViewById(R.id.turnierListView);
         listView.setAdapter(turnierAdapter);
+        listView.setEmptyView(findViewById(R.id.empty_list));
         registerForContextMenu(listView);
 
     }
@@ -122,10 +121,29 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void deleteTurnier(int id) {
-        this.sessionData.removeTurnier(id);
-        this.turnierAdapter.notifyDataSetChanged();
-        ListView listView = (ListView) findViewById(R.id.turnierListView);
-        listView.invalidate();
+    private void deleteTurnier(final int id_turnier) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.safety_delete_turnier_question)
+                .setTitle(R.string.safety_delete_turnier_title);
+
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int id){
+                sessionData.removeTurnier(id_turnier);
+                turnierAdapter.notifyDataSetChanged();
+                ListView listView = (ListView) findViewById(R.id.turnierListView);
+                listView.invalidate();
+            }
+        });
+
+        builder.setNegativeButton(R.string.abort, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

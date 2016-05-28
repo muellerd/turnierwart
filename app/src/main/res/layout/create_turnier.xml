@@ -20,30 +20,45 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/add_turnier_title"
-        android:id="@+id/textView2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/general_info"
+            android:id="@+id/textView2" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/ic_menu_save"
+            android:onClick="saveNewTurnier"/>
+    </LinearLayout>
 
     <EditText
         android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:id="@+id/edit_turnier_name"
-        android:hint="Name des Turniers" />
+        android:hint="@string/turnier_hint_name" />
 
     <EditText
         android:layout_width="241dp"
         android:layout_height="wrap_content"
         android:id="@+id/edit_turnier_ort"
-        android:hint="Ort des Turniers" />
+        android:hint="@string/turnier_hint_ort" />
 
     <EditText
         android:layout_width="242dp"
         android:layout_height="wrap_content"
         android:id="@+id/edit_turnier_ausrichter"
-        android:hint="Ausrichter des Turniers" />
+        android:hint="@string/turnier_hint_ausrichter" />
 
     <EditText
         android:layout_width="241dp"
@@ -51,7 +66,7 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/edit_turnier_start"
-        android:hint="Start des Turniers" />
+        android:hint="@string/turnier_hint_start" />
 
     <EditText
         android:layout_width="240dp"
@@ -59,15 +74,49 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/edit_turnier_ende"
-        android:hint="Ende des Turniers" />
+        android:hint="@string/turnier_hint_ende" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_save"
-        android:onClick="saveNewTurnier"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/specific_info"
+        android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="242dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/edit_turnier_win"
+        android:hint="@string/turnier_hint_win" />
+
+    <EditText
+        android:layout_width="242dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/edit_turnier_remis"
+        android:hint="@string/turnier_hint_remis" />
+
+    <EditText
+        android:layout_width="242dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/edit_turnier_groups"
+        android:hint="@string/tunier_hint_groups" />
+
+    <EditText
+        android:layout_width="242dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/edit_turnier_teams" />
 
 </LinearLayout>

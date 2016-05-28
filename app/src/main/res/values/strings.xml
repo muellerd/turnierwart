@@ -3,6 +3,20 @@
     <string name="action_settings">Settings</string>
     <string name="header">Meine Turniere</string>
     <string name="version">1.0</string>
-    <string name="add_turnier_title">Neues Turnier erstellen</string>
+    <string name="general_info">Allgemeine Informationen</string>
     <string name="delete_turnier">Löschen</string>
+    <string name="safety_delete_turnier_question">Möchten Sie dieses Turnier wirklich löschen?</string>
+    <string name="safety_delete_turnier_title">Turnier löschen</string>
+    <string name="delete">Löschen</string>
+    <string name="abort">Abbruch</string>
+    <string name="turnier_hint_name">Name des Turniers</string>
+    <string name="turnier_hint_ort">Ort des Turniers</string>
+    <string name="turnier_hint_ausrichter">Ausrichter des Turniers</string>
+    <string name="turnier_hint_start">Start des Turniers</string>
+    <string name="turnier_hint_ende">Ende des Turniers</string>
+    <string name="specific_info">Spezielle Informationen</string>
+    <string name="turnier_hint_win">Punkte für einen Sieg</string>
+    <string name="turnier_hint_remis">Punkte für ein Remis</string>
+    <string name="tunier_hint_groups">Anzahl der Gruppen</string>
+    <string name="no_turniers">Keine Turniere angelegt</string>
 </resources>

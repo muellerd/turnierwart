@@ -30,7 +30,7 @@ public class CreateTurnierActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         System.out.println(toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Turnierwart");
+        getSupportActionBar().setTitle("Neues Turnier erstellen");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         adapter = (TurnierAdapter) getIntent().getSerializableExtra("adapter");
@@ -45,6 +45,14 @@ public class CreateTurnierActivity extends AppCompatActivity {
         startEdit.setText("05.07.2016");
         EditText endEdit = (EditText) findViewById(R.id.edit_turnier_ende);
         endEdit.setText("12.07.2016");
+        EditText winEdit = (EditText) findViewById(R.id.edit_turnier_win);
+        winEdit.setText("2");
+        EditText remisEdit = (EditText) findViewById(R.id.edit_turnier_remis);
+        remisEdit.setText("1");
+        EditText groupsEdit = (EditText) findViewById(R.id.edit_turnier_groups);
+        groupsEdit.setText("2");
+        EditText teamsEdit = (EditText) findViewById(R.id.edit_turnier_teams);
+        teamsEdit.setText("Elsen\nSchlangen\nNeuhaus\nUni Paderborn");
     }
 
     @Override
@@ -75,8 +83,15 @@ public class CreateTurnierActivity extends AppCompatActivity {
         EditText ausrichterEdit = (EditText) findViewById(R.id.edit_turnier_ausrichter);
         EditText startEdit = (EditText) findViewById(R.id.edit_turnier_start);
         EditText endEdit = (EditText) findViewById(R.id.edit_turnier_ende);
+        EditText winEdit = (EditText) findViewById(R.id.edit_turnier_win);
+        EditText remisEdit = (EditText) findViewById(R.id.edit_turnier_remis);
+        EditText groupsEdit = (EditText) findViewById(R.id.edit_turnier_groups);
+        EditText teamsEdit = (EditText) findViewById(R.id.edit_turnier_teams);
+
+
         Turnier turnier = new Turnier(nameEdit.getText().toString(), startEdit.getText().toString(), endEdit.getText().toString(),
-                ortEdit.getText().toString(), ausrichterEdit.getText().toString());
+                ortEdit.getText().toString(), ausrichterEdit.getText().toString(), winEdit.getText().toString(),
+                remisEdit.getText().toString(), groupsEdit.getText().toString(), teamsEdit.getText().toString());
 
         /*Snackbar.make(view, "Du hast ein neues Turnier erzeugt: " + nameEdit.getText()
                 , Snackbar.LENGTH_LONG)
