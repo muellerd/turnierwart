@@ -20,8 +20,10 @@
         </activity>
         <activity
             android:name=".CreateTurnierActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".TurnierDetailActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
 
     </application>

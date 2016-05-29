@@ -11,4 +11,8 @@ public class Mannschaft implements Serializable {
     public Mannschaft(String na){
         name = na;
     }
+
+    public String getName() {
+        return name;
+    }
 }

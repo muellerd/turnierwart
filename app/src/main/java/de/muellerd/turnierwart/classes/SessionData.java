@@ -33,4 +33,8 @@ public class SessionData implements Serializable {
     public void removeTurnier(int id) {
         this.turniers.remove(id);
     }
+
+    public Turnier getTurnier(int position) {
+        return this.turniers.get(position);
+    }
 }

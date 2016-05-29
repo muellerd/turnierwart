@@ -27,9 +27,6 @@ public class CreateTurnierActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_turnier);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        System.out.println(toolbar);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Neues Turnier erstellen");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -92,10 +89,6 @@ public class CreateTurnierActivity extends AppCompatActivity {
         Turnier turnier = new Turnier(nameEdit.getText().toString(), startEdit.getText().toString(), endEdit.getText().toString(),
                 ortEdit.getText().toString(), ausrichterEdit.getText().toString(), winEdit.getText().toString(),
                 remisEdit.getText().toString(), groupsEdit.getText().toString(), teamsEdit.getText().toString());
-
-        /*Snackbar.make(view, "Du hast ein neues Turnier erzeugt: " + nameEdit.getText()
-                , Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();*/
 
         Intent result = new Intent();
         result.putExtra("turnier", turnier);

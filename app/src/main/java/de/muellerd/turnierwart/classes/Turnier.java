@@ -1,10 +1,13 @@
 package de.muellerd.turnierwart.classes;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -20,7 +23,9 @@ public class Turnier implements Serializable {
     private Spiel[] spiele;
     private int pointsForWin;
     private int pointsForRemis;
-    private String[] groups;
+    private String[] groupNames;
+    private HashMap<String, ArrayList<Mannschaft>> groups;
+    private HashMap<Mannschaft, String> teamToGroup;
 
     //public: andere Nutzer können nach dem Turnier suchen
     private boolean isPublic;
@@ -53,9 +58,11 @@ public class Turnier implements Serializable {
         }
         this.pointsForWin = Integer.parseInt(wi);
         this.pointsForRemis = Integer.parseInt(rem);
-        this.groups = new String[Integer.parseInt(gro)];
+        this.groupNames = new String[Integer.parseInt(gro)];
+        groups = new HashMap<String, ArrayList<Mannschaft>>();
         for(int i = 0; i < Integer.parseInt(gro); i++){
-            groups[i] = "Gruppe " + (i+1);
+            groupNames[i] = "Gruppe " + (i+1);
+            groups.put(groupNames[i], new ArrayList<Mannschaft>());
         }
         String[] teamSplit = tea.split("\n");
         mannschaften = new Mannschaft[teamSplit.length];
@@ -63,6 +70,7 @@ public class Turnier implements Serializable {
             Mannschaft man = new Mannschaft(teamSplit[j]);
             mannschaften[j] = man;
         }
+        teamToGroup = new HashMap<Mannschaft, String>();
     }
 
     public String toString(){
@@ -88,5 +96,15 @@ public class Turnier implements Serializable {
                 "\n" + ausrichter + ", " + ort;
         return descr;
 
+    }
+
+    public ArrayList<Mannschaft> getNotAssignedTeams() {
+        ArrayList<Mannschaft> naTeams = new ArrayList<Mannschaft>();
+        for(int i = 0; i < this.mannschaften.length; i++){
+            if(!this.teamToGroup.containsKey(mannschaften[i])){
+                naTeams.add(mannschaften[i]);
+            }
+        }
+        return naTeams;
     }
 }

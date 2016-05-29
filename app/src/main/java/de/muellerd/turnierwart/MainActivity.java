@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Turnierwart");
 
-        sessionData = new SessionData();
+        if (sessionData == null)
+            sessionData = new SessionData();
 
         turniers = sessionData.getTurnierListe();
         turnierAdapter = new TurnierAdapter(this,turniers);
@@ -46,6 +47,14 @@ public class MainActivity extends AppCompatActivity{
         final ListView listView = (ListView) findViewById(R.id.turnierListView);
         listView.setAdapter(turnierAdapter);
         listView.setEmptyView(findViewById(R.id.empty_list));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), TurnierDetailActivity.class);
+                intent.putExtra("turnier", sessionData.getTurnier(position));
+                startActivity(intent);
+            }
+        });
         registerForContextMenu(listView);
 
     }
