@@ -1,4 +1,4 @@
-package de.muellerd.turnierwart.classes;
+package de.muellerd.turnierwart.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;

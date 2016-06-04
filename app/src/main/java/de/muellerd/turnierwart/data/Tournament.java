@@ -1,4 +1,4 @@
-package de.muellerd.turnierwart.classes;
+package de.muellerd.turnierwart.data;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -25,6 +25,7 @@ public class Tournament implements Serializable {
     private String[] groupNames;
     private HashMap<String, ArrayList<Team>> groups;
     private HashMap<Team, String> teamToGroup;
+    private HashMap<String, Team> nameToTeam;
 
     //public: other users can search for Tournaments
     private boolean isPublic;
@@ -65,9 +66,11 @@ public class Tournament implements Serializable {
         }
         String[] teamSplit = tea.split("\n");
         teams = new Team[teamSplit.length];
+        nameToTeam = new HashMap<String, Team>();
         for(int j = 0; j < teamSplit.length; j++){
             Team man = new Team(teamSplit[j]);
             teams[j] = man;
+            nameToTeam.put(man.getName(), man);
         }
         teamToGroup = new HashMap<Team, String>();
     }
@@ -117,5 +120,49 @@ public class Tournament implements Serializable {
 
     public int getNumberNotAssignedTeams() {
         return this.teams.length - this.teamToGroup.keySet().size();
+    }
+
+    public void assignTeamToGroup(CharSequence teamName, CharSequence gn) {
+        String groupName = (String) gn;
+        Team t = nameToTeam.get(teamName);
+        teamToGroup.put(t, groupName);
+        if(groups.containsKey(groupName)){
+            groups.get(groupName).add(t);
+        }
+        else{
+            groups.put(groupName, new ArrayList<Team>());
+            groups.get(groupName).add(t);
+        }
+    }
+
+    public Team getNextAssignee() {
+        if(getNotAssignedTeams().size() > 0){
+            return getNotAssignedTeams().get(0);
+        }
+        return null;
+    }
+
+    public int getNumberOfTeams() {
+        return this.teams.length;
+    }
+
+    public ArrayList<GroupTuple> getGroupTuples() {
+        ArrayList<GroupTuple> tuples = new ArrayList<GroupTuple>();
+
+        for (String name : groupNames) {
+            String descr = "";
+
+            for (int j = 0; j < groups.get(name).size(); j++) {
+                descr += groups.get(name).get(j).getName();
+                if (j < groups.get(name).size() - 1) {
+                    descr += "\n";
+                }
+            }
+
+            GroupTuple tup = new GroupTuple(name, descr);
+            tuples.add(tup);
+        }
+
+        return tuples;
     }
 }

@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import de.muellerd.turnierwart.classes.SessionData;
-import de.muellerd.turnierwart.classes.Tournament;
+import de.muellerd.turnierwart.data.SessionData;
+import de.muellerd.turnierwart.data.Tournament;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity{
     private ArrayList<Tournament> tournaments;
     private TournamentAdapter tournamentAdapter;
 
-    public static final int CREATE_NEW_TURNIER = 1;
+    public static final int CREATE_NEW_TOURNAMENT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,18 @@ public class MainActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), AssignTournamentActivity.class);
-                intent.putExtra("turnier", sessionData.getTournament(position));
-                startActivity(intent);
+                Tournament t = sessionData.getTournament(position);
+                if(t.getNotAssignedTeams().size() > 0){
+                    Intent intent = new Intent(getApplicationContext(), AssignTournamentActivity.class);
+                    intent.putExtra("tournamentPosition", position);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(getApplicationContext(), TournamentDetailActivity.class);
+                    intent.putExtra("tournamentPosition", position);
+                    startActivity(intent);
+                }
+
             }
         });
         registerForContextMenu(listView);
@@ -81,20 +90,20 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public void openCreateTurnierActivity(View view){
+    public void openCreateTournamentActivity(View view){
         Intent intent = new Intent(this, CreateTournamentActivity.class);
-        startActivityForResult(intent, CREATE_NEW_TURNIER);
+        startActivityForResult(intent, CREATE_NEW_TOURNAMENT);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
-        if (requestCode == CREATE_NEW_TURNIER) {
+        if (requestCode == CREATE_NEW_TOURNAMENT) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
 
-                Tournament newTournament = (Tournament) data.getSerializableExtra("turnier");
+                Tournament newTournament = (Tournament) data.getSerializableExtra("tournament");
                 this.sessionData.addTournament(newTournament);
 
                 Context context = getApplicationContext();
@@ -104,7 +113,7 @@ public class MainActivity extends AppCompatActivity{
                 toast.show();
 
                 this.tournamentAdapter.notifyDataSetChanged();
-                ListView listView = (ListView) findViewById(R.id.turnierListView);
+                ListView listView = (ListView) findViewById(R.id.tournamentListView);
                 listView.invalidate();
             }
         }
@@ -123,24 +132,24 @@ public class MainActivity extends AppCompatActivity{
 
         switch (item.getItemId()){
             case R.id.context_delete:
-                deleteTurnier(info.position);
+                deleteTournament(info.position);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
-    private void deleteTurnier(final int id_turnier) {
+    private void deleteTournament(final int id_tournament) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.safety_delete_turnier_question)
-                .setTitle(R.string.safety_delete_turnier_title);
+        builder.setMessage(R.string.safety_delete_tournament_question)
+                .setTitle(R.string.safety_delete_tournament_title);
 
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int id){
-                sessionData.removeTournament(id_turnier);
+                sessionData.removeTournament(id_tournament);
                 tournamentAdapter.notifyDataSetChanged();
-                ListView listView = (ListView) findViewById(R.id.turnierListView);
+                ListView listView = (ListView) findViewById(R.id.tournamentListView);
                 listView.invalidate();
             }
         });

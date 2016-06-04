@@ -22,7 +22,7 @@
             android:name=".CreateTournamentActivity"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".TurnierDetailActivity"
+        <activity android:name=".TournamentDetailActivity"
             android:parentActivityName=".MainActivity">
         </activity>
 

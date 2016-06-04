@@ -9,29 +9,30 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import de.muellerd.turnierwart.data.GroupTuple;
 import de.muellerd.turnierwart.data.Tournament;
 
 /**
  * Created by daniel on 26.05.2016.
  */
-public class TournamentAdapter extends BaseAdapter{
+public class GroupAdapter extends BaseAdapter{
 
-    private static ArrayList<Tournament> tournaments;
+    private static ArrayList<GroupTuple> groupTuples;
     private LayoutInflater mInflater;
 
-    public TournamentAdapter(Context context, ArrayList<Tournament> ts){
+    public GroupAdapter(Context context, ArrayList<GroupTuple> gts){
         mInflater = LayoutInflater.from(context);
-        tournaments = ts;
+        groupTuples = gts;
     }
 
     @Override
     public int getCount() {
-        return tournaments.size();
+        return groupTuples.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return tournaments.get(position);
+        return groupTuples.get(position);
     }
 
     @Override
@@ -41,25 +42,25 @@ public class TournamentAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TournamentViewHolder tViewHolder;
+        GroupViewHolder tViewHolder;
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.tournament_row_view,null);
-            tViewHolder = new TournamentViewHolder();
-            tViewHolder.txtName = (TextView) convertView.findViewById(R.id.tournament_name);
-            tViewHolder.txtDescription = (TextView) convertView.findViewById(R.id.tournament_description);
+            convertView = mInflater.inflate(R.layout.group_row_view,null);
+            tViewHolder = new GroupViewHolder();
+            tViewHolder.txtName = (TextView) convertView.findViewById(R.id.group_name);
+            tViewHolder.txtDescription = (TextView) convertView.findViewById(R.id.group_description);
             convertView.setTag(tViewHolder);
         }
         else{
-            tViewHolder = (TournamentViewHolder) convertView.getTag();
+            tViewHolder = (GroupViewHolder) convertView.getTag();
         }
 
-        tViewHolder.txtName.setText(tournaments.get(position).getName());
-        tViewHolder.txtDescription.setText(tournaments.get(position).getDescription());
+        tViewHolder.txtName.setText(groupTuples.get(position).getName());
+        tViewHolder.txtDescription.setText(groupTuples.get(position).getDescription());
 
         return convertView;
     }
 
-    static class TournamentViewHolder {
+    static class GroupViewHolder {
         TextView txtName;
         TextView txtDescription;
     }

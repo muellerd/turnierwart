@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import de.muellerd.turnierwart.classes.Tournament;
+import de.muellerd.turnierwart.data.Tournament;
 
 /**
  * Created by daniel on 26.05.2016.
@@ -27,7 +27,7 @@ public class CreateTournamentActivity extends AppCompatActivity {
         adapter = (TournamentAdapter) getIntent().getSerializableExtra("adapter");
 
         EditText nameEdit = (EditText) findViewById(R.id.edit_tournament_name);
-        nameEdit.setText("Handball Tournament");
+        nameEdit.setText("Handball Turnier");
         EditText ortEdit = (EditText) findViewById(R.id.edit_tournament_ort);
         ortEdit.setText("Elsen");
         EditText ausrichterEdit = (EditText) findViewById(R.id.edit_tournament_ausrichter);
