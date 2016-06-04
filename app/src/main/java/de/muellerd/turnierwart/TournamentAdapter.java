@@ -7,35 +7,31 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import de.muellerd.turnierwart.classes.Turnier;
+import de.muellerd.turnierwart.classes.Tournament;
 
 /**
  * Created by daniel on 26.05.2016.
  */
-public class TurnierAdapter extends BaseAdapter{
+public class TournamentAdapter extends BaseAdapter{
 
-    private static ArrayList<Turnier> turniers;
+    private static ArrayList<Tournament> tournaments;
     private LayoutInflater mInflater;
 
-    public TurnierAdapter(Context context, ArrayList<Turnier> ts){
+    public TournamentAdapter(Context context, ArrayList<Tournament> ts){
         mInflater = LayoutInflater.from(context);
-        turniers = ts;
+        tournaments = ts;
     }
 
     @Override
     public int getCount() {
-        return turniers.size();
+        return tournaments.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return turniers.get(position);
+        return tournaments.get(position);
     }
 
     @Override
@@ -45,25 +41,25 @@ public class TurnierAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TurnierViewHolder tViewHolder;
+        TournamentViewHolder tViewHolder;
         if(convertView == null){
             convertView = mInflater.inflate(R.layout.custom_row_view,null);
-            tViewHolder = new TurnierViewHolder();
+            tViewHolder = new TournamentViewHolder();
             tViewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
             tViewHolder.txtDescription = (TextView) convertView.findViewById(R.id.description);
             convertView.setTag(tViewHolder);
         }
         else{
-            tViewHolder = (TurnierViewHolder) convertView.getTag();
+            tViewHolder = (TournamentViewHolder) convertView.getTag();
         }
 
-        tViewHolder.txtName.setText(turniers.get(position).getName());
-        tViewHolder.txtDescription.setText(turniers.get(position).getDescription());
+        tViewHolder.txtName.setText(tournaments.get(position).getName());
+        tViewHolder.txtDescription.setText(tournaments.get(position).getDescription());
 
         return convertView;
     }
 
-    static class TurnierViewHolder{
+    static class TournamentViewHolder {
         TextView txtName;
         TextView txtDescription;
     }

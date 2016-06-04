@@ -1,7 +1,6 @@
 package de.muellerd.turnierwart.classes;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,31 +9,31 @@ import java.util.HashMap;
  */
 public class SessionData implements Serializable {
 
-    private ArrayList<Turnier> turniers;
-    private HashMap<Turnier, ArrayList<Spiel>> turnierToSpiele;
+    private ArrayList<Tournament> tournaments;
+    private HashMap<Tournament, ArrayList<Game>> tournamentToGames;
 
     public SessionData(){
-        turniers = new ArrayList<Turnier>();
-        turnierToSpiele = new HashMap<Turnier, ArrayList<Spiel>>();
+        tournaments = new ArrayList<Tournament>();
+        tournamentToGames = new HashMap<Tournament, ArrayList<Game>>();
     }
 
-    public void addTurnier(Turnier turnier){
-        turniers.add(turnier);
+    public void addTournament(Tournament tournament){
+        tournaments.add(tournament);
     }
 
-    public int getNumberOfTurniers() {
-        return this.turniers.size();
+    public int getNumberOfTournaments() {
+        return this.tournaments.size();
     }
 
-    public ArrayList<Turnier> getTurnierListe() {
-        return this.turniers;
+    public ArrayList<Tournament> getListOfTournaments() {
+        return this.tournaments;
     }
 
-    public void removeTurnier(int id) {
-        this.turniers.remove(id);
+    public void removeTournament(int id) {
+        this.tournaments.remove(id);
     }
 
-    public Turnier getTurnier(int position) {
-        return this.turniers.get(position);
+    public Tournament getTournament(int position) {
+        return this.tournaments.get(position);
     }
 }

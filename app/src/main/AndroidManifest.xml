@@ -19,12 +19,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateTurnierActivity"
+            android:name=".CreateTournamentActivity"
             android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".TurnierDetailActivity"
             android:parentActivityName=".MainActivity">
         </activity>
+
+        <activity android:name=".AssignTournamentActivity">
+        </activity>
+
 
     </application>
 

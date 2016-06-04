@@ -19,14 +19,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import de.muellerd.turnierwart.classes.SessionData;
-import de.muellerd.turnierwart.classes.Turnier;
+import de.muellerd.turnierwart.classes.Tournament;
 
 public class MainActivity extends AppCompatActivity{
 
     public static SessionData sessionData;
 
-    private ArrayList<Turnier> turniers;
-    private TurnierAdapter turnierAdapter;
+    private ArrayList<Tournament> tournaments;
+    private TournamentAdapter tournamentAdapter;
 
     public static final int CREATE_NEW_TURNIER = 1;
 
@@ -41,17 +41,17 @@ public class MainActivity extends AppCompatActivity{
         if (sessionData == null)
             sessionData = new SessionData();
 
-        turniers = sessionData.getTurnierListe();
-        turnierAdapter = new TurnierAdapter(this,turniers);
+        tournaments = sessionData.getListOfTournaments();
+        tournamentAdapter = new TournamentAdapter(this, tournaments);
 
-        final ListView listView = (ListView) findViewById(R.id.turnierListView);
-        listView.setAdapter(turnierAdapter);
+        final ListView listView = (ListView) findViewById(R.id.tournamentListView);
+        listView.setAdapter(tournamentAdapter);
         listView.setEmptyView(findViewById(R.id.empty_list));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), TurnierDetailActivity.class);
-                intent.putExtra("turnier", sessionData.getTurnier(position));
+                Intent intent = new Intent(getApplicationContext(), AssignTournamentActivity.class);
+                intent.putExtra("turnier", sessionData.getTournament(position));
                 startActivity(intent);
             }
         });
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void openCreateTurnierActivity(View view){
-        Intent intent = new Intent(this, CreateTurnierActivity.class);
+        Intent intent = new Intent(this, CreateTournamentActivity.class);
         startActivityForResult(intent, CREATE_NEW_TURNIER);
 
     }
@@ -94,16 +94,16 @@ public class MainActivity extends AppCompatActivity{
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
 
-                Turnier newTurnier = (Turnier) data.getSerializableExtra("turnier");
-                this.sessionData.addTurnier(newTurnier);
+                Tournament newTournament = (Tournament) data.getSerializableExtra("turnier");
+                this.sessionData.addTournament(newTournament);
 
                 Context context = getApplicationContext();
-                CharSequence text = "Neues Turnier angelegt: " + newTurnier.getName();
+                CharSequence text = "Neues Turnier angelegt: " + newTournament.getName();
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
-                this.turnierAdapter.notifyDataSetChanged();
+                this.tournamentAdapter.notifyDataSetChanged();
                 ListView listView = (ListView) findViewById(R.id.turnierListView);
                 listView.invalidate();
             }
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity{
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.turnier_list_context, menu);
+        inflater.inflate(R.menu.tournament_list_context, menu);
     }
 
     @Override
@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity{
 
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int id){
-                sessionData.removeTurnier(id_turnier);
-                turnierAdapter.notifyDataSetChanged();
+                sessionData.removeTournament(id_turnier);
+                tournamentAdapter.notifyDataSetChanged();
                 ListView listView = (ListView) findViewById(R.id.turnierListView);
                 listView.invalidate();
             }

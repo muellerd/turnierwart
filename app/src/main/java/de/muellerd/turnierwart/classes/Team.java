@@ -5,10 +5,10 @@ import java.io.Serializable;
 /**
  * Created by daniel on 26.05.2016.
  */
-public class Mannschaft implements Serializable {
+public class Team implements Serializable {
     private String name;
 
-    public Mannschaft(String na){
+    public Team(String na){
         name = na;
     }
 
