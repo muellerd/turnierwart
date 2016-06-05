@@ -3,14 +3,13 @@ package de.muellerd.turnierwart.data;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- * Created by daniel on 26.05.2016.
- */
 public class Game {
 
     private Team teamA;
     private Team teamB;
-    private Date datum;
+    private Date date;
+
+    private int gameDbId;
 
     /* at the end, stores the result
         Key "A" for Team A

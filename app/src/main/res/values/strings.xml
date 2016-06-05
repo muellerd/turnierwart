@@ -21,4 +21,5 @@
     <string name="no_tournament">Keine Turniere angelegt</string>
     <string name="teams">Teams (1 pro Zeile)</string>
     <string name="drag_team_to_group_info">Bitte ziehe die offenen Teams von Links auf ihre jeweilige Gruppe.</string>
+    <string name="reset_db">Reset db</string>
 </resources>

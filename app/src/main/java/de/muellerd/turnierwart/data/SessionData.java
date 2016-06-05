@@ -1,20 +1,23 @@
 package de.muellerd.turnierwart.data;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by daniel on 26.05.2016.
- */
 public class SessionData implements Serializable {
 
     private ArrayList<Tournament> tournaments;
     private HashMap<Tournament, ArrayList<Game>> tournamentToGames;
+    private TournamentDbHelper tournamentDbHelper;
 
-    public SessionData(){
-        tournaments = new ArrayList<Tournament>();
-        tournamentToGames = new HashMap<Tournament, ArrayList<Game>>();
+    public SessionData(Context context){
+        tournaments = new ArrayList<>();
+        tournamentToGames = new HashMap<>();
+        tournamentDbHelper = new TournamentDbHelper(context);
+
     }
 
     public void addTournament(Tournament tournament){
@@ -35,5 +38,9 @@ public class SessionData implements Serializable {
 
     public Tournament getTournament(int position) {
         return this.tournaments.get(position);
+    }
+
+    public TournamentDbHelper getDbHelper() {
+        return this.tournamentDbHelper;
     }
 }

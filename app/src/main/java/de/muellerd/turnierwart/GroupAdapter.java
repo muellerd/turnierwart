@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import de.muellerd.turnierwart.data.GroupTuple;
 import de.muellerd.turnierwart.data.Tournament;
 
-/**
- * Created by daniel on 26.05.2016.
- */
 public class GroupAdapter extends BaseAdapter{
 
     private static ArrayList<GroupTuple> groupTuples;

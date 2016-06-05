@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import de.muellerd.turnierwart.data.GroupTuple;
 import de.muellerd.turnierwart.data.Tournament;
 
-/**
- * Created by daniel on 28.05.2016.
- */
 public class TournamentDetailActivity extends AppCompatActivity {
 
     private GroupAdapter groupAdapter;

@@ -10,9 +10,6 @@ import android.widget.Toast;
 import de.muellerd.turnierwart.data.Team;
 import de.muellerd.turnierwart.data.Tournament;
 
-/**
- * Created by daniel on 04.06.2016.
- */
 public class MyDragListener implements View.OnDragListener {
 
     private Tournament tournament;

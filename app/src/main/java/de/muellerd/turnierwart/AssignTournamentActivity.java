@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import de.muellerd.turnierwart.data.Group;
 import de.muellerd.turnierwart.data.Tournament;
 
-/**
- * Created by daniel on 04.06.2016.
- */
 public class AssignTournamentActivity extends AppCompatActivity {
 
     private Tournament tournament;
@@ -29,7 +30,7 @@ public class AssignTournamentActivity extends AppCompatActivity {
         position = (int) intent.getSerializableExtra("tournamentPosition");
         tournament = MainActivity.sessionData.getTournament(position);
 
-        String[] groups = tournament.getGroupNames();
+        ArrayList<Group> groups = tournament.getGroups();
 
         TextView title = (TextView) findViewById(R.id.assigned_teams);
         title.setText("Eingeteilte Mannschaften: " + tournament.getNumberAssignedTeams() + "/" + tournament.getNumberOfTeams());
@@ -52,9 +53,9 @@ public class AssignTournamentActivity extends AppCompatActivity {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.groupsView);
 
-        for(int i = 0; i < groups.length; i++){
+        for(int i = 0; i < groups.size(); i++){
             TextView tv = new TextView(this);
-            tv.setText(groups[i]);
+            tv.setText(groups.get(i).getName());
             tv.setTextSize(30);
             tv.setOnDragListener(new MyDragListener(tournament, title, toAssign, this));
             layout.addView(tv);

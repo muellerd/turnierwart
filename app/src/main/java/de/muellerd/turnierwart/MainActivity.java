@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setTitle("Turnierwart");
 
         if (sessionData == null)
-            sessionData = new SessionData();
+            sessionData = new SessionData(getApplicationContext());
 
         tournaments = sessionData.getListOfTournaments();
         tournamentAdapter = new TournamentAdapter(this, tournaments);
@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         registerForContextMenu(listView);
-
+        sessionData.getDbHelper().loadDataFromDb();
+        this.tournamentAdapter.notifyDataSetChanged();
+        listView.invalidate();
     }
 
     @Override
@@ -85,6 +87,10 @@ public class MainActivity extends AppCompatActivity{
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if(id == R.id.action_reset_db){
+            this.sessionData.getDbHelper().resetDatabase();
         }
 
         return super.onOptionsItemSelected(item);

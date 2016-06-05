@@ -10,9 +10,6 @@ import android.widget.EditText;
 
 import de.muellerd.turnierwart.data.Tournament;
 
-/**
- * Created by daniel on 26.05.2016.
- */
 public class CreateTournamentActivity extends AppCompatActivity {
 
     private TournamentAdapter adapter;
@@ -84,6 +81,10 @@ public class CreateTournamentActivity extends AppCompatActivity {
         Tournament tournament = new Tournament(nameEdit.getText().toString(), startEdit.getText().toString(), endEdit.getText().toString(),
                 placeEdit.getText().toString(), hostEdit.getText().toString(), winEdit.getText().toString(),
                 remisEdit.getText().toString(), groupsEdit.getText().toString(), teamsEdit.getText().toString());
+
+        MainActivity.sessionData.getDbHelper().saveTournament(tournament);
+        MainActivity.sessionData.getDbHelper().saveGroups(tournament);
+        MainActivity.sessionData.getDbHelper().saveTeams(tournament);
 
         Intent result = new Intent();
         result.putExtra("tournament", tournament);
